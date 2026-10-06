@@ -1,12 +1,14 @@
+package tn.esprit.gestionzoo.entities;
+
 public class Zoo {
-    Animal[] animals = new Animal[25];
-    String name;
-    String city;
-    final int nbrCages;
-    int nbrAnimals;
+    private Animal[] animals = new Animal[25];
+    private String name;
+    private String city;
+    private final int nbrCages;
+    private int nbrAnimals;
 
     public Zoo(String name, String city) {
-        this.name = name;
+        setName(name);
         this.city = city;
         this.nbrCages = 25;
     }
@@ -24,14 +26,13 @@ public class Zoo {
     }
 
     public boolean addAnimal(Animal animal) {
-
         // Vérifier si l'animal existe déjà
         if (searchAnimal(animal) != -1) {
             return false;
         }
 
         // Vérifier si le zoo est plein
-        if (nbrAnimals >= animals.length) {
+        if (isZooFull()) {
             return false;
         }
 
@@ -50,7 +51,7 @@ public class Zoo {
 
     public int searchAnimal(Animal animal) {
         for (int i = 0; i < nbrAnimals; i++) {
-            if (animals[i].name.equals(animal.name)) {
+            if (animals[i].getName().equals(animal.getName())) {
                 return i;
             }
         }
@@ -84,5 +85,32 @@ public class Zoo {
         } else {
             return z2;
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name != null && !name.isEmpty()) {
+            this.name = name;
+        }
+    }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public int getNbrAnimals() {
+        return nbrAnimals;
+    }
+
+    public void setNbrAnimals(int nbrAnimals) {
+        this.nbrAnimals = nbrAnimals;
+    }
+    public int getNbrCages() {
+        return nbrCages;
     }
 }
